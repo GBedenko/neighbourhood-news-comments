@@ -12,7 +12,7 @@ const router = new Router()
 
 const status = require('http-status-codes')
 
-const port = 8082
+const port = 8083
 
 const commentsController = require('./modules/comments-controller')
 
