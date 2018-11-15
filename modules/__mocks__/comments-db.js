@@ -11,13 +11,13 @@ commentsDB.addResourceToCollection = (databaseURL, collectionName, newResource) 
 // Mock retrieve all resources from a given collection
 commentsDB.getAllFromCollection = (databaseURL, collectionName) => new Promise((resolve, reject) => {
 
-    resolve([{"_id": 1234 , "comment":"test comment"}])
+    resolve([{"_id": 1234 , "comment": "test comment"}])
 })
 
 // Mock retrieve a specific resource from a collection
 commentsDB.getResourceFromCollection = (databaseURL, collectionName, resourceID) => new Promise((resolve, reject) => {
 
-    resolve({"_id": 1234, "comment":"test comment"})
+    resolve({"_id": 1234, "comment": "test comment"})
 })
 
 
