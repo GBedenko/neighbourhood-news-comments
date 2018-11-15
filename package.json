@@ -18,6 +18,7 @@
   "author": "bedenkog",
   "license": "ISC",
   "dependencies": {
+    "eslint": "^5.9.0",
     "express": "^4.16.4",
     "http-status-codes": "^1.3.0",
     "jest": "^23.6.0",
