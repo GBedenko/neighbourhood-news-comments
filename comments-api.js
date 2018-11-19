@@ -2,6 +2,8 @@
 
 'use strict'
 
+console.log("Booting Up Comments API Server...")
+
 const Koa = require('koa')
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
@@ -12,7 +14,7 @@ const router = new Router()
 
 const status = require('http-status-codes')
 
-const port = 8083
+const port = 8082
 
 const commentsController = require('./modules/comments-controller')
 
