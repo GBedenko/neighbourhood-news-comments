@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Pre-commit git hook running"
+
+# Runs linter on endpoints file and modules directory
+./node_modules/.bin/eslint comments-api.js modules/**
