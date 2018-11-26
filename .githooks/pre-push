@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Pre-push git hook running"
+
+# Runs Jest test suite before git push
+npm test
