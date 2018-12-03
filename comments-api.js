@@ -2,7 +2,7 @@
 
 'use strict'
 
-console.log("Booting Up Comments API Server...")
+console.log('Booting Up Comments API Server...')
 
 // Import koa packages
 const Koa = require('koa')
@@ -35,7 +35,7 @@ router.get('/api/v1.0/comments', async ctx => {
 
 	// Allow only get requests to this endpoint function
 	ctx.set('Allow', 'GET')
-	
+
 	// Request the comments object from the controller
 	const comments = await commentsController.getAll()
 
@@ -49,21 +49,21 @@ router.get('/api/v1.0/comments/:comment_id', async ctx => {
 
 	// Allow only get requests to this endpoint function
 	ctx.set('Allow', 'GET')
-	
+
 	// Request one comment object from the controller using the provided id
 	const comment = await commentsController.getById(ctx.params.comment_id)
 
 	// Assign the status code to 200 and response body object as the found comment
 	ctx.status = status.OK
-	ctx.body = comment		
+	ctx.body = comment
 })
 
 // POST Request for a new Comment
 router.post('/api/v1.0/comments', async ctx => {
 
 	// Allow only post requests to this endpoint function
-    ctx.set('Allow', 'POST')
-	
+	ctx.set('Allow', 'POST')
+
 	// Send the new comment object to the controller using the client request body
 	const addCommentResponse = await commentsController.add(ctx.request.body)
 
@@ -90,8 +90,8 @@ router.put('/api/v1.0/comments/:comment_id', async ctx => {
 router.del('/api/v1.0/comments/:comment_id', async ctx => {
 
 	// Allow only delete requests to this endpoint function
-	ctx.set('Allow', 'DELETE')    
-	
+	ctx.set('Allow', 'DELETE')
+
 	// Request the provided comment id's object to be deleted by the controller
 	const deleteCommentResponse = await commentsController.delete(ctx.params.comment_id)
 
