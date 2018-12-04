@@ -10,6 +10,7 @@ exports.add = async(commentObject) => {
 
 	const addComment = database.addResourceToCollection(databaseURL, commentsCollection, commentObject)
 		.then((result) => result)
+		.catch((reason) => reason)
 
 	const addCommentResponse = await addComment
 
@@ -21,6 +22,7 @@ exports.getById = async(commentID) => {
 
 	const getComment = database.getResourceFromCollection(databaseURL, commentsCollection, commentID)
 		.then((comment) => comment)
+		.catch((reason) => reason)
 
 	const comment = await getComment
 
@@ -47,6 +49,7 @@ exports.update = async(commentID, newCommentDetailsObject) => {
 
 	const updateComment = database.updateResource(databaseURL, commentsCollection, commentID, newCommentDetailsObject)
 		.then((comment) => comment)
+		.catch((reason) => reason)
 
 	const updateCommentResponse = await updateComment
 
@@ -58,6 +61,7 @@ exports.delete = async(commentID) => {
 
 	const deleteComment = database.deleteResource(databaseURL, commentsCollection, commentID)
 		.then((comment) => comment)
+		.catch((reason) => reason)
 
 	const deleteCommentResponse = await deleteComment
 

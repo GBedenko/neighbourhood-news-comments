@@ -5,49 +5,55 @@ const commentsController = jest.genMockFromModule('../comments-controller')
 // Mock adding a new comment response
 commentsController.add = async(commentObject) => {
 
-	const response = true
-
-	return response
+	if(Object.keys(commentObject).length == 0) {
+		return false
+	} else {
+		return true
+	}
 }
 
 // Mock retrieving one comment
 commentsController.getById = async(commentID) => {
 
-	const response = {'_id': 1234, comment: 'test comment'}
+	const mockedInvalidID = 6666
 
-	return response
+	if(commentID == mockedInvalidID) {
+		return {}
+	} else {
+		return {'_id': 1234, comment: 'test comment'}
+	}
 }
 
 // Mock retrieving all comments
 commentsController.getAll = async(queryObject) => {
 
-	const response = [{'_id': 1234, 'comment': 'test comment'}]
-
-	return response
-}
-
-// Mock retrieving a comment based on query object
-commentsController.getByQuery = async(commentObject) => {
-
-	const response = {'_id': 1234, comment: 'test comment'}
-
-	return response
+	if(Object.keys(queryObject).length == 0) {
+		return [{'_id': 1234, 'comment': 'test comment'}]
+	} else {
+		return [{'_id': 2345, 'comment': 'queried comment'}]
+	}
 }
 
 // Mock updating a comment response
 commentsController.update = async(commentID, newCommentDetailsObject) => {
 
-	const response = true
-
-	return response
+	if(Object.keys(newCommentDetailsObject).length == 0) {
+		return false
+	} else {
+		return true
+	}
 }
 
 // Mock deleting a comment response
 commentsController.delete = async(commentID) => {
 
-	const response = true
+	const mockedInvalidID = 6666
 
-	return response
+	if(commentID == mockedInvalidID) {
+		return false
+	} else {
+		return true
+	}
 }
 
 module.exports = commentsController
