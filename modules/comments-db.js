@@ -15,13 +15,20 @@ exports.addResourceToCollection = (databaseURL, collectionName, newResource) => 
 	// Once done, runs the callback to execute the query to add a new resource to the given collection
 	MongoClient.connect(databaseURL, (err, db) => {
 
-		const dbo = db.db(databaseName)
+		if(err)	reject(new Error('Unable to connect to MongoDB'))
 
-		dbo.collection(collectionName).insertOne(newResource, (err, res) => {
-			console.log('Document inserted to mongodb database: ' + databaseName + ', collection: ' + collectionName)
-			db.close()
-			resolve(true)
-		})
+		try {
+			const dbo = db.db(databaseName)
+
+			dbo.collection(collectionName).insertOne(newResource, (err, res) => {
+				console.log('Document inserted to mongodb database: ' + databaseName + ', collection: ' + collectionName)
+				db.close()
+				resolve(true)
+			})
+
+		} catch (err) {
+			reject(new Error('Unable to connect to MongoDB'))
+		}
 	})
 })
 
@@ -32,30 +39,43 @@ exports.getAllFromCollection = (databaseURL, collectionName) => new Promise((res
 	// Once done, runs the callback to execute the query to find all resources in the given collection
 	MongoClient.connect(databaseURL, (err, db) => {
 
-		// Create an instance of the mongodb database
-		const dbo = db.db(databaseName)
+		if(err)	reject(new Error('Unable to connect to MongoDB'))
 
-		// Mongodb query to find all resources from the collection and save it to an array called results
-		// Once completed, pass the result as the parameter to the callback function
-		dbo.collection(collectionName).find({}).toArray((err, result) => {
-			db.close()
-			resolve(result)
-		})
+		try {
+			// Create an instance of the mongodb database
+			const dbo = db.db(databaseName)
+
+			// Mongodb query to find all resources from the collection and save it to an array called results
+			// Once completed, pass the result as the parameter to the callback function
+			dbo.collection(collectionName).find({}).toArray((err, result) => {
+				db.close()
+				resolve(result)
+			})
+
+		} catch (err) {
+			reject(new Error('Unable to connect to MongoDB'))
+		}
 	})
 })
-
 
 // Retrieve a specific resource from a collection
 exports.getResourceFromCollection = (databaseURL, collectionName, resourceID) => new Promise((resolve, reject) => {
 
 	MongoClient.connect(databaseURL, (err, db) => {
 
-		const dbo = db.db(databaseName)
+		if(err)	reject(new Error('Unable to connect to MongoDB'))
 
-		dbo.collection(collectionName).findOne({'_id': new mongodb.ObjectId(resourceID)}, (err, result) => {
-			db.close()
-			resolve(result)
-		})
+		try {
+			const dbo = db.db(databaseName)
+
+			dbo.collection(collectionName).findOne({'_id': new mongodb.ObjectId(resourceID)}, (err, result) => {
+				db.close()
+				resolve(result)
+			})
+
+		} catch (err) {
+			reject(new Error('Unable to connect to MongoDB'))
+		}
 	})
 })
 
@@ -66,13 +86,20 @@ exports.updateResource = (databaseURL, collectionName, resourceID, newValuesObje
 	// Once done, runs the callback to execute the query to update the resource matching the id
 	MongoClient.connect(databaseURL, (err, db) => {
 
-		const dbo = db.db(databaseName)
+		if(err)	reject(new Error('Unable to connect to MongoDB'))
 
-		dbo.collection(collectionName).updateOne({_id: new mongodb.ObjectID(resourceID)}, {$set: newValuesObject}, (err, res) => {
-			console.log('Resource with id ' + resourceID + ' has been updated')
-			db.close()
-			resolve(true)
-		})
+		try {
+			const dbo = db.db(databaseName)
+
+			dbo.collection(collectionName).updateOne({_id: new mongodb.ObjectID(resourceID)}, {$set: newValuesObject}, (err, res) => {
+				console.log('Resource with id ' + resourceID + ' has been updated')
+				db.close()
+				resolve(true)
+			})
+
+		} catch (err) {
+			reject(new Error('Unable to connect to MongoDB'))
+		}
 	})
 })
 
@@ -83,13 +110,20 @@ exports.deleteResource = (databaseURL, collectionName, resourceID) => new Promis
 	// Once done, runs the callback to execute the query to delete one resource matching the id
 	MongoClient.connect(databaseURL, (err, db) => {
 
-		const dbo = db.db(databaseName)
+		if(err)	reject(new Error('Unable to connect to MongoDB'))
 
-		dbo.collection(collectionName).deleteOne({_id: new mongodb.ObjectID(resourceID)}, (err, obj) => {
-			console.log('Resource with id ' + resourceID + ' has been deleted')
-			db.close()
-			resolve(true)
-		})
+		try {
+			const dbo = db.db(databaseName)
+
+			dbo.collection(collectionName).deleteOne({_id: new mongodb.ObjectID(resourceID)}, (err, obj) => {
+				console.log('Resource with id ' + resourceID + ' has been deleted')
+				db.close()
+				resolve(true)
+			})
+
+		} catch (err) {
+			reject(new Error('Unable to connect to MongoDB'))
+		}
 	})
 })
 
