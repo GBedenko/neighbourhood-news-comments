@@ -71,15 +71,6 @@ describe('GET /comments/:comment_id endpoint', async() => {
         done()
 	})
 
-	// test('Requesting a comment that doesnt exist returns an 404 status code', async done => {
-
-    //     const response = await request(commentsAPI).get("/api/v1.0/comments/6666");
-
-    //     expect(response.status).toEqual(404)
-
-    //     done()
-	// })
-
 	test('Requesting a comment that doesnt exist returns an empty object', async done => {
 
         const response = await request(commentsAPI).get("/api/v1.0/comments/6666");
