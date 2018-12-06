@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1544014881459" clover="3.2.0">
-  <project timestamp="1544014881459" name="All files">
+<coverage generated="1544114871718" clover="3.2.0">
+  <project timestamp="1544114871718" name="All files">
     <metrics statements="142" coveredstatements="142" conditionals="16" coveredconditionals="16" methods="45" coveredmethods="45" elements="203" coveredelements="203" complexity="0" loc="142" ncloc="142" packages="2" files="3" classes="3">
       <package name="bedenkog-local-news-comments">
         <metrics statements="52" coveredstatements="52" conditionals="6" coveredconditionals="6" methods="7" coveredmethods="7"/>
