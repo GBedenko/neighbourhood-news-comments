@@ -32,6 +32,15 @@ describe('GET /comments endpoint', async() => {
         expect(response.body).toEqual([{"_id": 1234, "comment": "test comment"}])
 
         done()
+	})    
+
+	test('Requesting all comments with a query returns an array of objects', async done => {
+
+        const response = await request(commentsAPI).get("/api/v1.0/comments").send({"comment": "queried comment"});
+
+        expect(response.body).toEqual([{"_id": 2345, "comment": "queried comment"}])
+
+        done()
 	})
 })
 
@@ -50,7 +59,7 @@ describe('GET /comments/:comment_id endpoint', async() => {
         expect(response.status).toEqual(200)
 
         done()
-    })    
+    })
 
     // Test that the request recieves the correct JSON response
 	test('Requesting a comment returns a json object', async done => {
@@ -58,6 +67,15 @@ describe('GET /comments/:comment_id endpoint', async() => {
         const response = await request(commentsAPI).get("/api/v1.0/comments/123");
 
         expect(response.body).toEqual({"_id": 1234, "comment": "test comment"})
+
+        done()
+	})
+
+	test('Requesting a comment that doesnt exist returns an empty object', async done => {
+
+        const response = await request(commentsAPI).get("/api/v1.0/comments/6666");
+
+        expect(response.body).toEqual({})
 
         done()
 	})
@@ -88,6 +106,15 @@ describe('POST /comments endpoint', async() => {
         expect(response.body).toEqual({"status": "success", "commentAddedSuccessfully": true})
 
         done()
+	})    
+
+	test('Sending an empty comment returns a failed post request', async done => {
+
+        const response = await request(commentsAPI).post("/api/v1.0/comments").send({})
+
+        expect(response.body).toEqual({"status": "fail", "commentAddedSuccessfully": false})
+
+        done()
 	})
 })
 
@@ -116,6 +143,15 @@ describe('PUT /comments/:comment_id endpoint', async() => {
         expect(response.body).toEqual({"status": "success", "commentUpdatedSuccessfully": true})
 
         done()
+	})    
+
+	test('Updating a comment with an empty new object recieves a failed put request', async done => {
+
+        const response = await request(commentsAPI).put("/api/v1.0/comments/1234").send({})
+
+        expect(response.body).toEqual({"status": "fail", "commentUpdatedSuccessfully": false})
+
+        done()
 	})
 })
 
@@ -142,6 +178,15 @@ describe('DELETE /comments/:comment_id endpoint', async() => {
         const response = await request(commentsAPI).del("/api/v1.0/comments/1234")
 
         expect(response.body).toEqual({"status": "success", "commentDeletedSuccessfully": true})
+
+        done()
+    })
+
+	test('Deleting a comment that doesnt exist returns a failed delete request', async done => {
+
+        const response = await request(commentsAPI).del("/api/v1.0/comments/6666")
+
+        expect(response.body).toEqual({"status": "fail", "commentDeletedSuccessfully": false})
 
         done()
     })
